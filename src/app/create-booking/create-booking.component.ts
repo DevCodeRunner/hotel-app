@@ -39,7 +39,7 @@ dateChanged(event: Event, isStart: boolean){
   if(isStart){
     this.booking.startDate = new Date(val);
   }
-
+//  Date Picker binding scheint noch nicht zu funktionieren 
 }
  
 }
