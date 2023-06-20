@@ -1,11 +1,11 @@
 
 <div class="list-group "  *ngFor="let booking of bookings">
-    <a routerLink="/edit/{{booking.id}}" class="list-group-item list-group-item-action mb-2" aria-current="true">
+    <div class="list-group-item mb-2" aria-current="true">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{booking.name}}</h5>
-        <small>{{booking.id}}</small>
+        <a routerLink="/edit/{{booking.id}}"  class="mb-1 h5 text-decoration-none">{{booking.name}}</a>
+        <button (click)="deleteBooking(booking)" type="button" class="btn btn-danger">Löschen</button>
       </div>
       <p class="mb-1">Zeitraum: {{booking.startDate | date: 'dd/MM/yyy'}} - {{booking.endDate | date: 'dd/MM/yyy'}}</p>
       <small>Raum: {{booking.roomNumber}}</small>
-
+    </div>
       <!-- *ngFor="let booking of bookings erstellt eine Angular schleife die für alles innerhalb des divs eine Liste auf der page erstellt -->

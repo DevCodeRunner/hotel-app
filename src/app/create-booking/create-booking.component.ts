@@ -29,8 +29,18 @@ ngOnInit(): void {
 }
 
 save(): void {
+  var bookingById = Bookings.find(x => x.id == this.booking.id);
+
+  if(bookingById == null || bookingById == undefined){
+    Bookings.push(this.booking);
+  } else {
+    bookingById = this.booking;
+  }
+
   Bookings.push(this.booking);
   this.router.navigate(['bookings']);
+  
+ 
 }
 
 dateChanged(event: Event, isStart: boolean){
