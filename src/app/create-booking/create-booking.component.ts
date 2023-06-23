@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from '../booking';
-import { Bookings } from '../mock-bookings';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BookingService } from '../booking.service';
 
 @Component({
   selector: 'app-create-booking',
@@ -10,7 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateBookingComponent {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private bookingService:BookingService) {}
 
 booking: Booking = {
   id: 100,
@@ -23,21 +25,19 @@ booking: Booking = {
 ngOnInit(): void {
   if(this.router.url != '/create'){
   var id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-  var bookingById = Bookings.find(x => x.id == id)!;
+  var bookingById = this.bookingService.getBookingById(id);
   this.booking = bookingById;
   }
 }
 
 save(): void {
-  var bookingById = Bookings.find(x => x.id == this.booking.id);
-
+  var bookingById = this.bookingService.getBookingById(this.booking.id);
   if(bookingById == null || bookingById == undefined){
-    Bookings.push(this.booking);
+    this.bookingService.addBooking(this.booking); //Wenn kein Element vorhanden wird eins hinzugefügt
   } else {
-    bookingById = this.booking;
+    this.bookingService.updateBooking(this.booking) //Wenn ein Element Existiert, wird es geupdated
   }
 
-  Bookings.push(this.booking);
   this.router.navigate(['bookings']);
   
  
