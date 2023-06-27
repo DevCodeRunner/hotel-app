@@ -39,7 +39,7 @@ createDb() {
         endDate : new Date("2024-11-07")
       }
     ]
-    return bookings;
+    return {bookings};
 }
 
   constructor() { }
